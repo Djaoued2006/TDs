@@ -221,5 +221,36 @@ procedure sort(var head : pNode);
             end;
     end;
 
+// L1 -> L2
+
+procedure mergeBeg(var head1 , tail1 , head2 , tail2 : pNode);
+
+    begin
+        if (head1 <> NIL) then 
+            begin
+                tail1^.next := head2;
+                if (head2 <> NIL) then head2^.prev := tail1 
+                else 
+                    tail2 := tail1
+                head2 := head1; 
+            end;  
+    end;
+
+procedure mergeEnd(var head1 , tail1 , head2 , tail2 : pNode);
+
+    begin
+        if (head1 <> NIL) then 
+            begin 
+                tail2 := tail1;
+                if (head2 <> NIL) then 
+                    begin
+                        head1^.prev := tail2;
+                        tail2^.next := head1;
+                    end
+                else 
+                    head2 := head1;
+            end;
+    end;
+
 begin 
 end.

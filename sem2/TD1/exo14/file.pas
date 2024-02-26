@@ -54,7 +54,7 @@ procedure main();
     begin
         randomize;
         
-        testFunction(1000);
+        testFunction(10);
 
         freeLinkedList(head2); 
     end;

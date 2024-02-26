@@ -150,7 +150,7 @@ function getRandomLinkedList(length : integer) : pNode;
         getRandomLinkedList := head;
     end;
 
-function getTale(head : pNode) : pNode;
+function getTail(head : pNode) : pNode;
 
     var current : pNode;
 
@@ -160,7 +160,7 @@ function getTale(head : pNode) : pNode;
             while (current^.next <> NIL) do 
                 current := current^.next;
 
-        getTale := current; 
+        getTail := current; 
     end;
 
 procedure insertSortedList(var head1 , head2 : pNode);
@@ -172,8 +172,10 @@ procedure insertSortedList(var head1 , head2 : pNode);
             if (head2 = NIL) then head2 := head1
             else 
                 begin
-                    tale1 := getTale(head1);
-                    tale2 := getTale(head2);
+                    //la fonction getTail va retourner le dernier element dans la list!
+
+                    tale1 := getTail(head1);
+                    tale2 := getTail(head2);
 
                     if (tale1^.value <= head2^.value) then 
                         begin 
@@ -186,7 +188,28 @@ procedure insertSortedList(var head1 , head2 : pNode);
                         else 
                             begin
                                 current := head1;
-                                prev1 := NIL;
+                                prev1 := NIL; 
+                                
+                                {
+                                    supposons que : 
+                                        liste 1 : 1 -> 2 -> 3 -> 10 
+                                        liste 2 :  5 -> 6
+                                    la boucle suivante va traiter ce cas
+                                    
+                                    elle va couper la liste 1 en deux portions 
+
+                                    sous-liste 1 : 1 -> 2 -> 3
+                                    sous-liste 2 : 10
+
+                                    et elle va inserer la sous-liste 1 en debut de la list 2
+                                    donc on va obtenir 
+
+                                    liste 2 : 1 -> 2 -> 3 -> 5 -> 6 
+                                    liste 1 : 10
+
+                                    remarque : la liste est unidirectionele c pour cetter raison j'ai besoin du pointeur
+                                    prev1 qui va toujours garder l'adresse de l'element avant current!
+                                }
 
                                 while (current <> NIL) do 
                                     if (current^.value <= head2^.value) then 
@@ -197,6 +220,7 @@ procedure insertSortedList(var head1 , head2 : pNode);
                                     else 
                                         break;
                                 
+                                // si prev1 = NIL alors on a pas le cas special donc aucun traitement n'ai demande
                                 if (prev1 <> NIL) then 
                                     begin 
                                         prev1^.next := head2;
@@ -209,7 +233,9 @@ procedure insertSortedList(var head1 , head2 : pNode);
                                 
                                 while (current <> NIL) do 
                                     begin
-                                        if (next2 = NIL) then break;
+                                        if (next2 = NIL) then break; // si on a parcouru toute la liste 2 alors on a terminer
+                                                                    // il reste juste de traiter le cas ou on a pas parcouru toute la liste 1
+
                                         if (current^.value >= next2^.value) then 
                                             begin
                                                 prev2 := next2;
@@ -217,6 +243,7 @@ procedure insertSortedList(var head1 , head2 : pNode);
                                             end
                                         else 
                                             begin
+                                                //si la valeur d'un certain noeud dans la liste 1 est < la valeur de next2 alors on fait le traitement
                                                 temp := current^.next;
                                                 prev2^.next := current;
                                                 current^.next := next2;
@@ -230,6 +257,7 @@ procedure insertSortedList(var head1 , head2 : pNode);
                             end;
                 end; 
     end;
+ 
 
 begin 
 end.
