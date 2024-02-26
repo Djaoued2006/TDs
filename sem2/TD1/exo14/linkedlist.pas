@@ -15,7 +15,7 @@ interface
     procedure sort(var head : pNode);
     function getLength(head : pNode) : integer;
     function getRandomLinkedList(length : integer) : pNode;
-    procedure insertSortedList(var head1 , head2 : pNode);
+    procedure mergeLists(var head1 , head2 : pNode);
 
 implementation
 
@@ -163,7 +163,7 @@ function getTail(head : pNode) : pNode;
         getTail := current; 
     end;
 
-procedure insertSortedList(var head1 , head2 : pNode);
+procedure mergeLists(var head1 , head2 : pNode);
     
     var tale1 , tale2 , prev1 , prev2 , next2 , current , temp , next : pNode;
 

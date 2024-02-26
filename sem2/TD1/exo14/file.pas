@@ -30,7 +30,7 @@ procedure testFunction(numberOfTimes : integer);
                 head2 := getRandomLinkedList(size);
                 sort(head1);
                 sort(head2);
-                insertSortedList(head1 , head2);
+                mergeLists(head1 , head2);
                 if (testSorting(head2)) then 
                     begin 
                         writeln('test passed! ');
