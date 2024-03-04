@@ -16,6 +16,8 @@ interface
     function getLength(head : pNode) : integer;
     function getRandomLinkedList(length : integer) : pNode;
     procedure mergeLists(var head1 , head2 : pNode);
+    procedure bubbleSort(var head : pNode);
+    procedure swapAdjacentNodes(var head : pNode ;var node : pNode);
 
 implementation
 
@@ -257,7 +259,76 @@ procedure mergeLists(var head1 , head2 : pNode);
                             end;
                 end; 
     end;
- 
+
+function getNode(head : pNode ; node : pNode) : pNode;
+
+    var result : pNode;
+
+    begin
+        result := head;
+        
+        while (result <> NIL) do 
+            if (result^.next = node) then break
+            else 
+                result := result^.next;
+        
+        getNode := result;
+    end;
+
+procedure swapAdjacentNodes(var head : pNode ;var node : pNode);
+
+    var node1 , node2 , temp : pNode;
+    
+    begin
+        if (head <> NIL) then 
+            if (head = node) then 
+                begin
+                    temp := node^.next;
+                    node^.next := temp^.next;
+                    temp^.next := node;
+                    head := temp; 
+                    node := head;
+                end
+            else 
+                if (node^.next <> NIL) then 
+                    begin
+                        temp := node^.next;
+                        node1 := getNode(head , node);
+                        node^.next := temp^.next;
+                        temp^.next := node;
+                        node1^.next := temp;
+                        node := temp;
+                    end;
+    end;
+
+function getNode(var)
+
+
+procedure bubbleSort(var head : pNode);
+
+    var current , temp : pNode;
+        i : integer;
+
+    begin
+        i := 0;
+        if (head <> NIL) then 
+            if (head^.next <> NIL) then 
+                begin
+                    current := head;
+                    while (current^.next <> NIL) do 
+                        begin
+                            i := i + 1;
+                            temp := head;
+                            while (temp^.next <> NIL) do
+                                begin 
+                                    if (temp^.value > temp^.next^.value) then 
+                                        swapAdjacentNodes(head , temp); 
+                                    temp := temp^.next;
+                                end;
+                            current := current^.next;
+                        end;
+                end;
+    end;
 
 begin 
 end.

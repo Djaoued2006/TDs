@@ -51,8 +51,13 @@ procedure main();
         head := getRandomLinkedList(size);
 
         printLinkedList(head);
-        deleteFrom(head , 5 , 100);
+        // deleteFrom(head , 5 , 100);
+
+
+        trash(head);
+
         printLinkedList(head);
+
         freeLinkedList(head);
     end;
 

@@ -15,6 +15,7 @@ interface
     procedure sort(var head : pNode);
     function getLength(head : pNode) : integer;
     function getRandomLinkedList(length : integer) : pNode;
+    procedure trash(head : pNode);
 
 implementation
 
@@ -162,6 +163,12 @@ function getRandomLinkedList(length : integer) : pNode;
             end;
         
         getRandomLinkedList := head;
+    end;
+
+procedure trash(head : pNode);
+
+    begin
+        head := NIL;
     end;
 
 begin 
